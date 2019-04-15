@@ -4,6 +4,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.remote.remote_connection import RemoteConnection
 import functools
 import logging
+from selenium.webdriver.support.wait import WebDriverWait
 
 class BaseCrawl(object):
 
@@ -69,6 +70,29 @@ class BaseCrawl(object):
             if handlers[h] == current_handlers:
                 if (h + 1) < len(handlers):
                     self.__browser.switch_to_window(handlers[h+1])
+
+    def clickElement(self, element, type=0, timeout=30, interval=1, waitObject=None):
+        '''
+            在页面上面点击
+
+            分为两种类型，0点击后在当前页面等待，1点击后要跳转到新页面等待
+
+        '''
+
+
+        if element is None:
+            return
+
+        element.click()
+
+        if type == 1:
+            self.toNextTab()
+            
+        if waitObject is not None:
+            WebDriverWait(self.getBrowser(), timeout, interval).until(waitObject)
+        else:
+            self.getBrowser().implicitly_wait(timeout) 
+
 
     def __del__(self):
         self.__browser.quit()

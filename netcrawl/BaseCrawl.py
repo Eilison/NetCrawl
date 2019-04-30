@@ -28,7 +28,10 @@ class BaseCrawl(object):
     # get content of the request url
     def getContent(self, url):
         self.getBrowser().get(url)
-        self.getBrowser().implicitly_wait(30)
+        self.waitLast()
+
+    def waitLast(self, t=30):
+        self.getBrowser().implicitly_wait(t)
 
     # close the browser by key
     def closeWin(self):

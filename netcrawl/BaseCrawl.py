@@ -94,7 +94,7 @@ class BaseCrawl(object):
         if waitObject is not None:
             WebDriverWait(self.getBrowser(), timeout, interval).until(waitObject)
         else:
-            self.getBrowser().implicitly_wait(timeout) 
+            self.waitLast(timeout) 
 
 
     def __del__(self):

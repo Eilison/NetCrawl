@@ -11,7 +11,7 @@ class BaseCrawl(object):
     __host = "127.0.0.1"
     __browser = None
 
-    def __init__(self, hubip = "127.0.0.1"):
+    def __init__(self, hubip = "127.0.0.1:4444"):
         logging.debug("server ip : " + hubip)
         self.__host = hubip
         self.makeDriver()
@@ -19,7 +19,7 @@ class BaseCrawl(object):
     # create browser
     def makeDriver(self):
         hostname = "http://" + self.__host + "/wd/hub"
-        self.__browser = webdriver.Remote(desired_capabilities=DesiredCapabilities.CHROME)
+        self.__browser = webdriver.Remote(command_executor=hostname, desired_capabilities=DesiredCapabilities.CHROME)
 
     # get browser
     def getBrowser(self):

@@ -4,3 +4,6 @@ build/
 main.py
 .pypirc
 netcrawl.egg-info/
+
+*.jpg
+*.png

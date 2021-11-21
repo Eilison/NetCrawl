@@ -19,7 +19,14 @@ class BaseCrawl(object):
     # create browser
     def makeDriver(self):
         hostname = "http://" + self.__host + "/wd/hub"
-        self.__browser = webdriver.Remote(command_executor=hostname, desired_capabilities=DesiredCapabilities.CHROME)
+
+        options = webdriver.ChromeOptions()
+        options.add_argument("no-sandbox")
+        options.add_argument("--disable-gpu")
+        options.add_argument("headless")
+        options.add_argument("--disable-dev-shm-usage")
+
+        self.__browser = webdriver.Remote(command_executor=hostname, desired_capabilities=DesiredCapabilities.CHROME, options=options)
 
     # get browser
     def getBrowser(self):
@@ -36,7 +43,6 @@ class BaseCrawl(object):
     # close the browser by key
     def closeWin(self):
         self.__browser.close()
-        self.__browser = None
 
     # find single element
     def findElement(self, fType, value):
@@ -95,6 +101,9 @@ class BaseCrawl(object):
             WebDriverWait(self.getBrowser(), timeout, interval).until(waitObject)
         else:
             self.waitLast(timeout) 
+
+    def toFirstTab(self):
+        self.getBrowser().switch_to_window(self.getTabs()[0])
 
 
     def __del__(self):

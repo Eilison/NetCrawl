@@ -21,6 +21,7 @@ class BaseCrawl(object):
         hostname = "http://" + self.__host + "/wd/hub"
 
         options = webdriver.ChromeOptions()
+        options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 SE 2.X MetaSr 1.0')
         options.add_argument("no-sandbox")
         options.add_argument("--disable-gpu")
         options.add_argument("headless")

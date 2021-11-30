@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='netcrawl',
-    version='v1.1.1',
+    version='v1.2.1',
     author='eilison',
     author_email='1277886419@qq.com',
     url='https://github.com/Eilison/NetCrawl.git',
